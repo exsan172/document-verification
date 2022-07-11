@@ -316,12 +316,14 @@ const Review = () => {
                 }
 
                 await addDoc(notifCollection, notifData)
+                await updateDoc(detailLetter, {
+                    isVerify : "waiting"
+                })
                 alert("Sukses melakukan pembaruan pengajuan, tunggu beberapa saat hinga verifikator menyetujui!")
                 setLoading(false)
                 handleCloseEdit()
 
             } catch (error) {
-                console.log("error => ", error);
                 alert("Gagal melakukan pengajuan, coba lagi!")
                 setLoading(false)
             }
@@ -354,9 +356,21 @@ const Review = () => {
                         </div>
                         <div className="d-flex my-4 w-100 justify-content-center">
                             <div className="col-11 col-md-6">
-                                <div className="d-flex flex-fill mb-4 border-bottom pb-2">
-                                    <b>Detail Pengajuan : </b>
-                                </div>
+                                {
+                                    dataReview.isVerify === false &&
+                                    <>
+                                        <div className="d-flex flex-fill mb-2 border-bottom pb-2">
+                                            <b>Detail Perbaikan : </b>
+                                        </div>
+                                        <div className="d-flex mb-5">
+                                            <sapan>- {dataReview.textReviewer}</sapan>
+                                        </div>
+                                        <div className="d-flex flex-fill mb-4 border-bottom pb-2">
+                                            <b>Detail Pengajuan : </b>
+                                        </div>
+                                    </>
+                                }
+
                                 <div className="d-flex flex-fill my-2 flex-column">
                                     <div className="d-flex flex-column my-2">
                                         <div className="d-flex">

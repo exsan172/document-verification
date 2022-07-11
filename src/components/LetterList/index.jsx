@@ -18,7 +18,6 @@ const LetterList = () => {
                 dataArray.push({ ...doc.data(), id: doc.id})
             ))
 
-            console.log("dataArray => ", dataArray);
             setDataLetter(dataArray)
         }
 
